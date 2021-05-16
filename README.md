@@ -4,10 +4,13 @@ Jsonnet NG is a fork of original extenstion from [heptio](https://github.com/hep
 with some fixes and improvements. This fork created because the original 
 project was abandoned and archived.
 
-A simple bare-bones extension providing simple syntax highlighting
-for [Jsonnet][jsonnet] files (specifically, files with the `.jsonnet`
-and `.libsonnet` suffixes), as well as a Markdown-style preview pane
-that auto-updates every time you save.
+Extension features:
+
+- simple syntax highlighting and code completion for [Jsonnet][jsonnet]
+  files (specifically, files with the `.jsonnet` and `.libsonnet` 
+  suffixes)
+- Markdown-style preview pane that auto-updates every time you save
+- manual formatting of Jsonnet documents
 
 ![Jsonnet preview][jsonnet-demo]
 
@@ -26,6 +29,9 @@ After this, you can use the keybinding for `jsonnet.previewToSide` (by
 default this is `shift+ctrl+i`, or `shift+cmd+i` on macOS), and the
 preview pane will open as in the picture above.
 
+For the formatting feature you have to configure `jsonnet.fmtExecutablePath`
+in you `setting.json`. After this you can use **Format document** feature.
+
 ## Customization
 
 This extension exposes the following settings, which can be customized
@@ -33,6 +39,9 @@ in `settings.json`:
 
 * `jsonnet.executablePath`: Tells the extension where to find the
   `jsonnet` executable, if it's not on the `PATH`. (NOTE: This setting
+  is always necessary on Windows.)
+* `jsonnet.fmtExecutablePath`: Tells the extension where to find the
+  `jsonnetfmt` executable, if it's not on the `PATH`. (NOTE: This setting
   is always necessary on Windows.)
 * `jsonnet.libPaths`: Additional paths to search for libraries when compiling Jsonnet code.
 * `jsonnet.outputFormat`: Preview output format: yaml or json (default is yaml).
