@@ -6,23 +6,22 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as vs from 'vscode';
 import * as yaml from "js-yaml";
-
 import * as im from 'immutable';
-
 import * as lexical from '../compiler/lexical-analysis/lexical';
-
-import * as vscode from 'vscode';
-
+import * as formatting from './formatting';
 
 // activate registers the Jsonnet language server with vscode, and
 // configures it based on the contents of the workspace JSON file.
 export const activate = (context: vs.ExtensionContext) => {
+  formatting.activate(context);
   register.jsonnetClient(context);
   const diagProvider = register.diagnostics(context);
   register.previewCommands(context, diagProvider);
 }
 
-export const deactivate = () => { }
+export const deactivate = () => { 
+  formatting.deactivate();
+}
 
 namespace register {
   // jsonnetClient registers the Jsonnet language client with vscode.
@@ -532,7 +531,7 @@ namespace display {
       editor.document.fileName
     )}'`;
 
-    const panel = vscode.window.createWebviewPanel(
+    const panel = vs.window.createWebviewPanel(
       "jsonnetPreview",
       title,
       getViewColumn(sideBySide) || vs.ViewColumn.One,

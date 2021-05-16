@@ -55,6 +55,11 @@
           "description": "Location of the `jsonnet` executable.",
           "type": "string"
         },
+        "jsonnet.fmtExecutablePath": {
+          "default": null,
+          "description": "Location of the `jsonnetfmt` executable.",
+          "type": "string"
+        },
         "jsonnet.extStrs": {
           "default": null,
           "description": "External strings to pass to `jsonnet` executable.",
