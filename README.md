@@ -27,7 +27,9 @@ that the extension knows where to find it.
 
 After this, you can use the keybinding for `jsonnet.previewToSide` (by
 default this is `shift+ctrl+i`, or `shift+cmd+i` on macOS), and the
-preview pane will open as in the picture above.
+preview pane will open as in the picture above. Also you can bring a preview
+by clicking **preview button** on the editor toolbar. 
+
 
 For the formatting feature you have to configure `jsonnet.fmtExecutablePath`
 in you `setting.json`. After this you can use **Format document** feature.

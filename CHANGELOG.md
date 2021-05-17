@@ -3,6 +3,11 @@ All notable changes to the "Jsonnet NG" extension will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.0] 2021-05-17
+## Added
+- Preview button on editor toolbar
+- Reformatting document with external `jsonnetfmt` tool
+
 ## [1.0.0] 2021-04-27
 ## Added
 - VSCode extension icon
