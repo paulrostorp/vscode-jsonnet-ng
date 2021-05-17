@@ -41,13 +41,27 @@
     "commands": [
       {
         "command": "jsonnet.previewToSide",
-        "title": "Jsonnet NG: Open Preview to the Side"
+        "title": "Jsonnet NG: Open Preview to the Side",
+        "when": "editorLangId == jsonnet",
+        "icon": "$(open-preview)"
       },
       {
         "command": "jsonnet.preview",
-        "title": "Jsonnet NG: Open Preview"
+        "title": "Jsonnet NG: Open Preview",
+        "when": "editorLangId == jsonnet",
+        "icon": "$(preview)"
       }
     ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "editorLangId == jsonnet",
+          "command": "jsonnet.previewToSide",
+          "alt": "jsonnet.preview",
+          "group": "navigation"
+        }
+      ]
+    },
     "configuration": {
       "properties": {
         "jsonnet.executablePath": {
