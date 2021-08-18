@@ -19,7 +19,7 @@ export const activate = (context: vs.ExtensionContext) => {
   register.previewCommands(context, diagProvider);
 }
 
-export const deactivate = () => { 
+export const deactivate = () => {
   formatting.deactivate();
 }
 
@@ -91,6 +91,11 @@ namespace register {
     context.subscriptions.push(vs.workspace.onDidOpenTextDocument(preview));
     context.subscriptions.push(vs.workspace.onDidCloseTextDocument(doc => {
       docProvider.delete(doc);
+    }));
+    context.subscriptions.push(vs.workspace.onDidChangeConfiguration(event => {
+      if (event.affectsConfiguration('jsonnet')) {
+        docProvider.flushPreviewCache();
+      }
     }));
 
     // Call `preview` when we open the editor.
@@ -326,6 +331,10 @@ namespace jsonnet {
         });
     }
 
+    public flushPreviewCache = () => {
+      this.previewCache = this.previewCache.clear();
+    }
+
     public cachePreview = (sourceDoc: vs.TextDocument): RuntimeFailure | string => {
       const sourceUri = sourceDoc.uri.toString();
       const sourceFile = sourceDoc.uri.fsPath
@@ -526,7 +535,7 @@ namespace display {
       alert.documentNotJsonnet(languageId);
       return;
     }
-    
+
     const title = `Jsonnet preview '${path.basename(
       editor.document.fileName
     )}'`;
