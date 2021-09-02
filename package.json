@@ -69,6 +69,11 @@
           "description": "Location of the `jsonnet` executable.",
           "type": "string"
         },
+        "jsonnet.workingDirectory": {
+          "default": null,
+          "description": "Root directory for libs. Set to `workspace` to use the current workspace or the path to use. Leave blank to fallback to `/`",
+          "type": "string"
+        },
         "jsonnet.fmtExecutablePath": {
           "default": null,
           "description": "Location of the `jsonnetfmt` executable.",

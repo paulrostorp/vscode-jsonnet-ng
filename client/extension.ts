@@ -109,6 +109,7 @@ namespace register {
 namespace workspace {
   const extStrsProp = "extStrs";
   const execPathProp = "executablePath";
+  const workingDirectory = "workingDirectory";
 
   export const extStrs = (): string => {
     const extStrsObj = vs.workspace.getConfiguration('jsonnet')[extStrsProp];
@@ -117,6 +118,23 @@ namespace workspace {
       : Object.keys(extStrsObj)
         .map(key => `--ext-str ${key}="${extStrsObj[key]}"`)
         .join(" ");
+  }
+
+  const getRootPath = (): string | undefined => {
+    const wd = vs.workspace.getConfiguration[workingDirectory];
+    if (wd == "workspace") {
+      return vs.workspace.workspaceFolders?.[0].uri.fsPath;
+    } else {
+      return wd
+    }
+  }
+
+  const formatPath = (path: string, rootPath?: string): string => {
+    if (rootPath && path.substring(0, 1) != "/") {
+      return rootPath + "/" + path;
+    } else {
+      return path;
+    }
   }
 
   export const libPaths = (): string => {
@@ -140,6 +158,7 @@ namespace workspace {
     }
 
     return libPaths
+      .map(path => formatPath(path, getRootPath()))
       .map(path => `-J ${path}`)
       .join(" ");
   }
